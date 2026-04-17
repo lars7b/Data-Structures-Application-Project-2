@@ -3,9 +3,11 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+StarterKit/obj/Debug
+StarterKit/bin/Debug/net8.0
+
 # dotenv files
 .env
-
 # User-specific files
 *.rsuser
 *.suo
