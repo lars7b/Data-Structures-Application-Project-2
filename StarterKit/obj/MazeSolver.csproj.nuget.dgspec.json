@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lars7\\Downloads\\StarterKit\\StarterKit\\MazeSolver.csproj": {}
+    "/Users/darrinwever/Projects/School/Year 2/DSA/Project 2/StarterKit/MazeSolver.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lars7\\Downloads\\StarterKit\\StarterKit\\MazeSolver.csproj": {
+    "/Users/darrinwever/Projects/School/Year 2/DSA/Project 2/StarterKit/MazeSolver.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lars7\\Downloads\\StarterKit\\StarterKit\\MazeSolver.csproj",
+        "projectUniqueName": "/Users/darrinwever/Projects/School/Year 2/DSA/Project 2/StarterKit/MazeSolver.csproj",
         "projectName": "MazeSolver",
-        "projectPath": "C:\\Users\\lars7\\Downloads\\StarterKit\\StarterKit\\MazeSolver.csproj",
-        "packagesPath": "C:\\Users\\lars7\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lars7\\Downloads\\StarterKit\\StarterKit\\obj\\",
+        "projectPath": "/Users/darrinwever/Projects/School/Year 2/DSA/Project 2/StarterKit/MazeSolver.csproj",
+        "packagesPath": "/Users/darrinwever/.nuget/packages/",
+        "outputPath": "/Users/darrinwever/Projects/School/Year 2/DSA/Project 2/StarterKit/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lars7\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/darrinwever/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -38,11 +38,17 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Spectre.Console": {
+              "target": "Package",
+              "version": "[0.55.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -57,19 +63,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
+              "version": "[8.0.23, 8.0.23]"
             },
             {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[8.0.13, 8.0.13]"
+              "name": "Microsoft.NETCore.App.Host.osx-arm64",
+              "version": "[8.0.23, 8.0.23]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
+              "version": "[8.0.23, 8.0.23]"
             }
           ],
           "frameworkReferences": {
@@ -77,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/Users/darrinwever/.dotnet/sdk/9.0.309/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

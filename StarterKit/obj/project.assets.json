@@ -1,26 +1,101 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "Spectre.Console/0.55.2": {
+        "type": "package",
+        "dependencies": {
+          "Spectre.Console.Ansi": "0.55.2"
+        },
+        "compile": {
+          "lib/net8.0/Spectre.Console.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Spectre.Console.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Spectre.Console.Ansi/0.55.2": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Spectre.Console.Ansi.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Spectre.Console.Ansi.dll": {
+            "related": ".xml"
+          }
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Spectre.Console/0.55.2": {
+      "sha512": "yc0g12YJpmZHofGJLTQX02/uqfzJ6XHRx6pe9rANNjleQptXMHPxD9KI2/DWkXiJWddc+4oizEdGox15c89hhw==",
+      "type": "package",
+      "path": "spectre.console/0.55.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net10.0/Spectre.Console.dll",
+        "lib/net10.0/Spectre.Console.xml",
+        "lib/net8.0/Spectre.Console.dll",
+        "lib/net8.0/Spectre.Console.xml",
+        "lib/net9.0/Spectre.Console.dll",
+        "lib/net9.0/Spectre.Console.xml",
+        "lib/netstandard2.0/Spectre.Console.dll",
+        "lib/netstandard2.0/Spectre.Console.xml",
+        "logo.png",
+        "spectre.console.0.55.2.nupkg.sha512",
+        "spectre.console.nuspec"
+      ]
+    },
+    "Spectre.Console.Ansi/0.55.2": {
+      "sha512": "tN3KEJQQZwLW9HJnG5YTSAxfBwxsmg1wVuGvhGG2rM+pbl+NGaHU8pDcNofPlOXlgpkbpBMxI5t9o9qPfy3sHQ==",
+      "type": "package",
+      "path": "spectre.console.ansi/0.55.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net10.0/Spectre.Console.Ansi.dll",
+        "lib/net10.0/Spectre.Console.Ansi.xml",
+        "lib/net8.0/Spectre.Console.Ansi.dll",
+        "lib/net8.0/Spectre.Console.Ansi.xml",
+        "lib/net9.0/Spectre.Console.Ansi.dll",
+        "lib/net9.0/Spectre.Console.Ansi.xml",
+        "lib/netstandard2.0/Spectre.Console.Ansi.dll",
+        "lib/netstandard2.0/Spectre.Console.Ansi.xml",
+        "logo.png",
+        "spectre.console.ansi.0.55.2.nupkg.sha512",
+        "spectre.console.ansi.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "Spectre.Console >= 0.55.2"
+    ]
   },
   "packageFolders": {
-    "C:\\Users\\lars7\\.nuget\\packages\\": {}
+    "/Users/darrinwever/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lars7\\Downloads\\StarterKit\\StarterKit\\MazeSolver.csproj",
+      "projectUniqueName": "/Users/darrinwever/Projects/School/Year 2/DSA/Project 2/StarterKit/MazeSolver.csproj",
       "projectName": "MazeSolver",
-      "projectPath": "C:\\Users\\lars7\\Downloads\\StarterKit\\StarterKit\\MazeSolver.csproj",
-      "packagesPath": "C:\\Users\\lars7\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lars7\\Downloads\\StarterKit\\StarterKit\\obj\\",
+      "projectPath": "/Users/darrinwever/Projects/School/Year 2/DSA/Project 2/StarterKit/MazeSolver.csproj",
+      "packagesPath": "/Users/darrinwever/.nuget/packages/",
+      "outputPath": "/Users/darrinwever/Projects/School/Year 2/DSA/Project 2/StarterKit/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lars7\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/darrinwever/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -44,11 +119,17 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
+        "dependencies": {
+          "Spectre.Console": {
+            "target": "Package",
+            "version": "[0.55.2, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -63,19 +144,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.13, 8.0.13]"
+            "version": "[8.0.23, 8.0.23]"
           },
           {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[8.0.13, 8.0.13]"
+            "name": "Microsoft.NETCore.App.Host.osx-arm64",
+            "version": "[8.0.23, 8.0.23]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.13, 8.0.13]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.13, 8.0.13]"
+            "version": "[8.0.23, 8.0.23]"
           }
         ],
         "frameworkReferences": {
@@ -83,7 +160,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/darrinwever/.dotnet/sdk/9.0.309/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
