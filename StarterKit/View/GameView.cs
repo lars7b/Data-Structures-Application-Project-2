@@ -1,3 +1,4 @@
+using MazeSolver.Controller;
 using Spectre.Console;
 
 namespace MazeSolver.View;
@@ -9,7 +10,7 @@ public static class GameView
         while (true)
         {
             DrawPanel();
-            var choices = new List<string> { "Recursive", "Stack", "A*", "Dijkstra", "Manually", "Exit" };
+            var choices = new List<string> { "Recursive", "Stack", "A*", "Dijkstra", "Manual", "Exit" };
 
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().Title(
                     "Select a pathfinder:")
@@ -18,15 +19,20 @@ public static class GameView
             switch (choice)
             {
                 case "recursive":
-                    throw new NotImplementedException();
+                    GameController.Recursive();
+                    break;
                 case "stack":
-                    throw new NotImplementedException();
+                    GameController.Stack();
+                    break;
                 case "a*":
-                    throw new NotImplementedException();
+                    GameController.AStar();
+                    break;
                 case "dijkstra":
-                    throw new NotImplementedException();
-                case "manually":
-                    throw new NotImplementedException();
+                    GameController.Dijkstra();
+                    break;
+                case "manual":
+                    GameController.Manual();
+                    break;
                 case "exit":
                     return;
             }
@@ -36,13 +42,18 @@ public static class GameView
     private static void DrawPanel()
     {
         AnsiConsole.Clear();
-        AnsiConsole.Write(new Panel("Hello World!").Header("[blue bold]Welcome to the amazing Maze[/]").RoundedBorder()
-            .Expand());
+        AnsiConsole.Write(new Panel(BuildMaze()).Header("[blue bold] Welcome to the amazing Maze [/]")
+            .RoundedBorder().BorderColor(Color.Blue));
     }
 
-    private static Canvas DrawMaze()
+    private static Canvas BuildMaze()
     {
-        return new Canvas(4, 3);
+        var canvas = new Canvas(50, 25);
+        for (var i = 0; i < 50; i++)
+        for (var j = 0; j < 25; j++)
+            canvas.SetPixel(i, j, Color.Blue);
+
+        return canvas;
     }
 
     private static void DrawProgressBar()
