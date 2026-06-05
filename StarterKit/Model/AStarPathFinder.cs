@@ -73,7 +73,7 @@ namespace Model
                         
                         Node neighbor = new Node(){
                             Coords= check,
-                            Travelled = current.Travelled + 1,
+                            Travelled = tentativeG,
                             Heuristic= ManhattanDistance(check, goal),
                             Parent = current
                         };
