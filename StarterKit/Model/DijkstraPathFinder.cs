@@ -39,7 +39,7 @@ public class DijkstraPathFinder : IPathFinder
 
                 if (!maze.IsValidMove(nRow, nCol)) continue;
                 var neighbour = graph.Grid[nRow, nCol];
-                var newDistance = neighbour.Distance + 1;
+                var newDistance = current.Distance + 1;
 
                 if (newDistance >= neighbour.Distance) continue;
                 neighbour.Distance = newDistance;
