@@ -53,7 +53,7 @@ public class BinaryTree
             }
         }
     }
-    public void Connect(BinaryTreeNode parent, BinaryTreeNode child, bool isNorth)
+    private void Connect(BinaryTreeNode parent, BinaryTreeNode child, bool isNorth)
     {
         child.Parent = parent;
         if (isNorth)
@@ -68,7 +68,7 @@ public class BinaryTree
 }
 public static class BinaryTreeMazeGenerator
 {
-    public static int[][] BinaryTreeMazeGeneration(int rows, int cols)
+    public static int[][] Generate(int rows, int cols)
     {
         var tree = new BinaryTree(rows, cols);
         var nodes = tree.Nodes;

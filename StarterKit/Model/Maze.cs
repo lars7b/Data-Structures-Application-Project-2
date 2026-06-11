@@ -38,7 +38,7 @@ namespace Model
             int cellRows = rows / 2;
             int cellCols = cols / 2;
 
-            MazeArray = BinaryTreeMazeGenerator.BinaryTreeMazeGeneration(cellRows, cellCols);
+            MazeArray = BinaryTreeMazeGenerator.Generate(cellRows, cellCols);
             
             Random random  = new Random();
             //set Begin
