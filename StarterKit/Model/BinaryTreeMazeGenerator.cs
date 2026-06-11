@@ -24,6 +24,34 @@ public class BinaryTree
             }
         }
         Root = Nodes[0, cols - 1];
+        //makes BinaryTree with random connections
+        Random random = new Random();
+        for(int row = 0; row < rows; row++){
+            for(int col = 0; col < cols; col++){
+                BinaryTreeNode current = Nodes[row,col];
+                bool NorthAvailable = row > 0;
+                bool EastAvailable = col < cols - 1;
+                if(NorthAvailable && EastAvailable)
+                {
+                    if(random.Next(2) == 0)
+                    {
+                        Connect(current, Nodes[row - 1, col], true);
+                    }
+                    else
+                    {
+                        Connect(current, Nodes[row, col + 1], false);
+                    }
+                }
+                else if (NorthAvailable)
+                {
+                    Connect(current, Nodes[row - 1, col], true);
+                }
+                else if (EastAvailable)
+                {
+                    Connect(current, Nodes[row, col + 1], false);
+                }
+            }
+        }
     }
     public void Connect(BinaryTreeNode parent, BinaryTreeNode child, bool isNorth)
     {
@@ -44,34 +72,6 @@ public static class BinaryTreeMazeGenerator
     {
         var tree = new BinaryTree(rows, cols);
         var nodes = tree.Nodes;
-        
-        Random random = new Random();
-        for(int row = 0; row < rows; row++){
-            for(int col = 0; col < cols; col++){
-                BinaryTreeNode current = nodes[row,col];
-                bool NorthAvailable = row > 0;
-                bool EastAvailable = col < cols - 1;
-                if(NorthAvailable && EastAvailable)
-                {
-                    if(random.Next(2) == 0)
-                    {
-                        tree.Connect(current, nodes[row - 1, col], true);
-                    }
-                    else
-                    {
-                        tree.Connect(current, nodes[row, col + 1], false);
-                    }
-                }
-                else if (NorthAvailable)
-                {
-                    tree.Connect(current, nodes[row - 1, col], true);
-                }
-                else if (EastAvailable)
-                {
-                    tree.Connect(current, nodes[row, col + 1], false);
-                }
-            }
-        }
 
         int height = 2 * rows;
         int width = 2 * cols;
