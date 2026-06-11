@@ -34,10 +34,34 @@ namespace Model
             if(cols % 2 != 0) {cols++;}
 
             //ToDo...
+            // GenerateFromText(MazeGrids.mazeText); //remove this line and implement the task
+            int cellRows = rows / 2;
+            int cellCols = cols / 2;
 
-            GenerateFromText(MazeGrids.mazeText); //remove this line and implement the task
+            MazeArray = BinaryTreeMazeGenerator.BinaryTreeMazeGeneration(cellRows, cellCols);
+            
+            Random random  = new Random();
+            //set Begin
+            Begin = [1, 1];
+            //set End
+            End = [2*random.Next(cellRows) + 1, 2*random.Next(cellCols) + 1];
+
+            //set Begin in MazeArray
+            MazeArray[Begin[0]][Begin[1]] = 1;
+            //set End in MazeArray
+            MazeArray[End[0]][End[1]] = 2;
+            //init MDArray
+            MazeMDArray = new int[MazeArray.Length, MazeArray[0].Length];
+
+            for(int MDrow = 0; MDrow < MazeArray.Length; MDrow++)
+            {
+                for(int MDcol = 0; MDcol < MazeArray[0].Length; MDcol++)
+                {
+                    MazeMDArray[MDrow, MDcol] = MazeArray[MDrow][MDcol];
+                }
+            }
         }
-
+        
         int[][] ToMazeArray(string maze)
         {
             // substrings from the maze string
@@ -182,9 +206,7 @@ namespace Model
                     IsValidPos(MazeArray, newRow, newColumn) &&
                     !(MazeArray[newRow][newColumn] == -1 || MazeArray[newRow][newColumn] == 4); //no walls, not yet visited 
         }
-        
     }
-
     public static class MazeGrids
     {
       public static string mazeText = @"
