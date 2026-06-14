@@ -135,6 +135,22 @@ namespace View
         
             System.Console.WriteLine();
 
+            int[,] gridCopy = new int[array.Length, array[0].Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int j = 0; j < array[0].Length; j++)
+                {
+                    gridCopy[i, j] = -1;
+                }
+            }
+
+            int stepCounter = 0;
+            foreach (var pos in visitedPositions)
+            {
+                gridCopy[pos[0], pos[1]] = stepCounter;
+                stepCounter++;
+            }
+
             // Loop over the elements of the maze array
             // and display as characters.
             for (int rowIdx = 0; rowIdx < array.Length; rowIdx++)
@@ -162,8 +178,13 @@ namespace View
                         case 0:                     //not visited
                             if (currPos[0] == rowIdx && currPos[1] == colIdx)
                                 Console.Write("⚽️");
-                            else if (visitedPositions.Any(_ => _[0] == rowIdx && _[1] == colIdx))
-                                Console.Write("🏃");  
+                            else if (gridCopy[rowIdx, colIdx] != -1)
+                            {
+                                int orderIndex = gridCopy[rowIdx, colIdx];
+                                int totalSteps = visitedPositions.Count;
+                                string symbol = symbolsArr[(totalSteps -  orderIndex) % symbolsArr.Length]; 
+                                Console.Write(symbol);
+                            }
                             else
                                 Console.Write("  ");
                             break;
@@ -222,6 +243,17 @@ namespace View
             var toBeShownPositions = new Queue<int[]>(visitedPositions);
             var shownPositions = new Queue<int[]>();
 
+            int[,] gridCopy = new int[array.GetLength(0), array.GetLength(1)];
+                for (int i = 0; i < array.GetLength(0); i++)
+                {
+                    for (int j = 0; j < array.GetLength(1); j++)
+                    {
+                        gridCopy[i, j] = -1;
+                    }
+                }
+
+            int stepCounter = 0;
+
             while (toBeShownPositions.Count > 0)
             {
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
@@ -230,6 +262,8 @@ namespace View
 
                 var currPos = toBeShownPositions.Dequeue();
                 shownPositions.Enqueue(currPos);
+
+                gridCopy[currPos[0], currPos[1]] = stepCounter;
 
                 //Marking strategy:
 
@@ -267,9 +301,11 @@ namespace View
                                 {
                                     Console.Write("⚽️");
                                 }
-                                else if (shownPositions.Any(_ => _[0] == rowIdx && _[1] == colIdx))
+                                else if (gridCopy[rowIdx, colIdx] != -1)
                                 {
-                                    Console.Write("🏃");
+                                    int orderIndex = gridCopy[rowIdx, colIdx];
+                                    string symbol = symbolsArr[(stepCounter -  orderIndex) % symbolsArr.Length]; 
+                                    Console.Write(symbol);
                                 }
                                 else
                                     Console.Write("  ");
@@ -298,7 +334,9 @@ namespace View
                 for (int colIdx = 0; colIdx <= array.GetLength(1); colIdx++)
                     Console.Write("🟦");
                 Console.WriteLine();
-
+                
+                stepCounter++;
+                
                 Thread.Sleep(timeInterval);
                 //Console.Clear();
             }
@@ -312,6 +350,17 @@ namespace View
             var toBeShownPositions = new Queue<int[]>(visitedPositions);
             var shownPositions = new Queue<int[]>();
 
+            int[,] gridCopy = new int[array.GetLength(0), array.GetLength(1)];
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    gridCopy[i, j] = -1;
+                }
+            }
+
+            int stepCounter = 0;
+
             while (toBeShownPositions.Count > 0)
             {
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
@@ -321,6 +370,8 @@ namespace View
                 var currPos = toBeShownPositions.Dequeue();
                 shownPositions.Enqueue(currPos);
 
+                gridCopy[currPos[0], currPos[1]] = stepCounter;
+                
                 //Marking strategy:
 
                 // if (array[currPos[0], currPos[1]] == 2)
@@ -362,9 +413,11 @@ namespace View
                                 {
                                     Console.Write("⚽️");
                                 }
-                                else if (shownPositions.Any(_ => _[0] == rowIdx && _[1] == colIdx))
+                                else if (gridCopy[rowIdx, colIdx] != -1)
                                 {
-                                    Console.Write("🏃");
+                                    int orderIndex = gridCopy[rowIdx, colIdx];
+                                    string symbol = symbolsArr[(stepCounter -  orderIndex) % symbolsArr.Length]; 
+                                    Console.Write(symbol);
                                 }
                                 else
                                     Console.Write("  ");
@@ -393,6 +446,8 @@ namespace View
                 for (int colIdx = 0; colIdx <= array.GetLength(1); colIdx++)
                     Console.Write("🟦");
                 Console.WriteLine();
+
+                stepCounter++;
 
                 Thread.Sleep(timeInterval);
                 //Console.Clear();
