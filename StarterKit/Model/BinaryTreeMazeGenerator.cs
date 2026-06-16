@@ -73,8 +73,8 @@ public static class BinaryTreeMazeGenerator
         var tree = new BinaryTree(rows, cols);
         var nodes = tree.Nodes;
 
-        int height = 2 * rows + 1;
-        int width = 2 * cols + 1;
+        int height = 2 * rows;
+        int width = 2 * cols;
         int[][] maze = new int[height][];
         for(int row = 0; row < height; row++)
         {
