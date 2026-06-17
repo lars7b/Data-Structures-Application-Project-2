@@ -60,12 +60,6 @@ namespace View
 
       static void ProgressBar(int numBlocks, int timeInterval)
       {
-          Console.WriteLine($"\n\n{String.Join("", Enumerable.Repeat(" ", numBlocks/6))}✈️  Starting in a while...⏱️ \n");
-          for(int i = 1; i <= numBlocks; i++)
-          { 
-              Console.Write("🟩");
-              Thread.Sleep(timeInterval);
-          }
           Console.Write($"\n\n{String.Join("", Enumerable.Repeat(" ", numBlocks/6))}  🏁 START! 🏁");
           Thread.Sleep(2*timeInterval);      
       }

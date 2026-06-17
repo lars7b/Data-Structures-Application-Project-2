@@ -15,7 +15,8 @@ namespace View
             //Console.Clear();
             var array = maze.MazeArray;
            
-            Console.WriteLine("\n");
+            Console.SetCursorPosition(0, 14);
+
 
             // Loop over the elements of the maze array
             // and display as characters.
@@ -126,14 +127,14 @@ namespace View
             var array = maze.MazeArray;
             Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.BackgroundColor = ConsoleColor.White;
-            Console.Clear();
+            Console.SetCursorPosition(0, 10);
               
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine($"\n\n{String.Concat(Enumerable.Repeat("🟨", maze.MazeMDArray.GetLength(1)/2 - algType.ToString().Length/3) )}{"  " + algType + "  "}{String.Concat(Enumerable.Repeat("🟨", maze.MazeMDArray.GetLength(1)/2 - algType.ToString().Length/3))}");
             Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.BackgroundColor = ConsoleColor.White;
         
-            System.Console.WriteLine();
+            System.Console.WriteLine("                         ");
 
             int[,] gridCopy = new int[array.Length, array[0].Length];
             for (int i = 0; i < array.Length; i++)
@@ -227,8 +228,8 @@ namespace View
                 //Reset Maze
                 visitedPositions = new Queue<int[]>(); 
                 Console.WriteLine("\n");
-                Console.WriteLine("👍 DONE!!! AMAZING!!! 👍");
-                Thread.Sleep(300);
+                Console.WriteLine("👍 DONE!!! AMAZING!!! 👍. Press any key to continue.");
+                Console.ReadKey();
                 return;
                 
             }
@@ -258,7 +259,7 @@ namespace View
             {
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.BackgroundColor = ConsoleColor.White;
-                Console.Clear();
+                Console.SetCursorPosition(0, 10);
 
                 var currPos = toBeShownPositions.Dequeue();
                 shownPositions.Enqueue(currPos);
@@ -344,7 +345,6 @@ namespace View
 
         public void DisplayMaze(Maze maze, string[] symbolsArr, int timeInterval, Queue<int[]> visitedPositions, PathFinderType algType = PathFinderType.Manual)
         {
-
             var array = maze.MazeMDArray;
 
             var toBeShownPositions = new Queue<int[]>(visitedPositions);
@@ -363,9 +363,10 @@ namespace View
 
             while (toBeShownPositions.Count > 0)
             {
+                Console.SetCursorPosition(0, 10);
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.BackgroundColor = ConsoleColor.White;
-                Console.Clear();
+
 
                 var currPos = toBeShownPositions.Dequeue();
                 shownPositions.Enqueue(currPos);
@@ -379,11 +380,12 @@ namespace View
                 // else
                 //     array[currPos[0], currPos[1]] = 4;
 
+
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine($"\n\n{String.Concat(Enumerable.Repeat("🟨", maze.MazeMDArray.GetLength(1)/2 - algType.ToString().Length/3) )}{"  " + algType + "  "}{String.Concat(Enumerable.Repeat("🟨", maze.MazeMDArray.GetLength(1)/2 - algType.ToString().Length/3))}");
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.BackgroundColor = ConsoleColor.White;
-                Console.WriteLine();
+                Console.WriteLine("                                      ");
 
                 // Loop over the elements of the maze array
                 // and display as characters.
@@ -486,12 +488,11 @@ namespace View
             return symbols;
         }
 
-        public void DisplaySuccess(bool success, string msg, int timeInterval)
+        public void DisplaySuccess(bool success, string msg)
         {
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine(success ? msg + "🎉 Path found! 🎊" : msg + "🔎  No path found. 🔎 ");
-            if(!success) 
-                Thread.Sleep(timeInterval);
+            Console.WriteLine(success ? msg + "🎉 Path found! 🎊. Press any key to continue." : msg + "🔎  No path found. 🔎 Press any key to continue.");
+            Console.ReadKey();
         }
         private void PrintWrongMove(int[] tmppos)
         {
