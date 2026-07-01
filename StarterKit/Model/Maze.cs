@@ -1,6 +1,3 @@
-
-using System.Data;
-
 namespace Model
 {
     public class Maze
@@ -39,6 +36,7 @@ namespace Model
             int cellCols = cols / 2;
 
             MazeArray = BinaryTreeMazeGenerator.Generate(cellRows, cellCols);
+            BraidMaze(MazeArray);
             
             Random random  = new Random();
             //set Begin
@@ -59,6 +57,33 @@ namespace Model
                 {
                     MazeMDArray[MDrow, MDcol] = MazeArray[MDrow][MDcol];
                 }
+            }
+        }
+
+        private static void BraidMaze(int[][] maze, double rate = 0.10)
+        {
+            var random = new Random();
+            var height = maze.Length;
+            var width = maze[0].Length;
+
+            for (var row = 1; row < height - 1; row++)
+            for (var col = 1; col < width - 1; col++)
+            {
+                if (maze[row][col] != -1) continue;
+
+                var evenRow = row % 2 == 0;
+                var evenCol = col % 2 == 0;
+
+                if (evenRow && evenCol) continue;
+
+                bool canRemove;
+
+                if (evenRow)
+                    canRemove = maze[row - 1][col] == 0 && maze[row + 1][col] == 0;
+                else
+                    canRemove = maze[row][col - 1] == 0 && maze[row][col + 1] == 0;
+
+                if (canRemove && random.NextDouble() < rate) maze[row][col] = 0;
             }
         }
         
