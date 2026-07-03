@@ -93,16 +93,40 @@ namespace Controller
                 }
             }
             //Algorithms part of Controller:
-            else{
+            else
+            {
                 _view.DisplayMaze(_maze);
                 var visitedPositions = new Queue<int[]>();
                 _pathFinder.FindPath(_maze, _maze.Begin, visitedPositions);
-                bool success = visitedPositions.ToList().Last()[0] == _maze.End[0] && visitedPositions.ToList().Last()[1] == _maze.End[1];
-                string msg = $"\n\n{String.Join("", Enumerable.Repeat(" ", _maze.MazeMDArray.GetLength(1)/6))}";
-                //_view.DisplayMaze(_maze, symbols, _timeInterval, visitedPositions);
-                _view.DisplayMaze(_maze, symbols, _timeInterval, visitedPositions, _pathFinder.algType);
-                _view.DisplaySuccess(success, msg);
-                
+
+                var success = visitedPositions.Count > 0
+                              && visitedPositions.Last()[0] == _maze.End[0]
+                              && visitedPositions.Last()[1] == _maze.End[1];
+
+                var padding = string.Join("", Enumerable.Repeat(" ", _maze.MazeMDArray.GetLength(1) / 6));
+                var msg = $"\n\n{padding}";
+
+                if (_pathFinder is DijkstraPathFinder dijkstra)
+                {
+                    _view.DisplayMaze(_maze, symbols, _timeInterval, dijkstra.ExploredNodes, _pathFinder.algType);
+
+                    Console.ReadKey();
+                    
+                    _view.DisplayMaze(_maze, symbols, _timeInterval, visitedPositions, _pathFinder.algType);
+
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.WriteLine($"Steps Taken: {dijkstra.SearchSteps}");
+                    Console.WriteLine($"Path length    : {dijkstra.PathCost} steps");
+                    Console.WriteLine(
+                        $"{(success ? "Path found!" : "No path found.")}  Press any key to continue.");
+                    Console.ResetColor();
+                    Console.ReadKey();
+                }
+                else
+                {
+                    _view.DisplayMaze(_maze, symbols, _timeInterval, visitedPositions, _pathFinder.algType);
+                    _view.DisplaySuccess(success, msg);
+                }
             }
         }
 

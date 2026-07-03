@@ -4,19 +4,24 @@ public class DijkstraPathFinder : IPathFinder
 {
     public PathFinderType algType { get; set; } = PathFinderType.Dijkstra;
 
+    public Queue<int[]> ExploredNodes { get; private set; } = new();
+    public int SearchSteps { get; private set; }
+    public int PathCost { get; private set; }
 
     public void FindPath(Maze maze, int[] pos, Queue<int[]> visitedPositions)
     {
+        ExploredNodes = new Queue<int[]>();
+        SearchSteps = 0;
+        PathCost = 0;
+
         var rows = maze.MazeArray.Length;
         var cols = maze.MazeArray[0].Length;
 
         var graph = new Graph(rows, cols);
 
-        var start = new Node(pos[0], pos[1])
-        {
-            Distance = 0
-        };
+        var settled = new HashSet<(int, int)>();
 
+        var start = new Node(pos[0], pos[1]) { Distance = 0 };
         Node? end = null;
 
         var queue = new PriorityQueue<Node, int>();
@@ -25,6 +30,10 @@ public class DijkstraPathFinder : IPathFinder
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
+            if (!settled.Add((current.Row, current.Col))) continue;
+
+            ExploredNodes.Enqueue(new[] { current.Row, current.Col });
+            SearchSteps++;
 
             if (current.Row == maze.End[0] && current.Col == maze.End[1])
             {
@@ -38,10 +47,13 @@ public class DijkstraPathFinder : IPathFinder
                 var nCol = current.Col + move[1];
 
                 if (!maze.IsValidMove(nRow, nCol)) continue;
+                if (settled.Contains((nRow, nCol))) continue;
+
                 var neighbour = graph.Grid[nRow, nCol];
                 var newDistance = current.Distance + 1;
 
                 if (newDistance >= neighbour.Distance) continue;
+
                 neighbour.Distance = newDistance;
                 neighbour.Previous = current;
 
@@ -50,18 +62,18 @@ public class DijkstraPathFinder : IPathFinder
         }
 
         if (end == null) return;
+
+        var stack = new Stack<int[]>();
+        var pathNode = end;
+        while (pathNode != null)
         {
-            var stack = new Stack<int[]>();
-            var current = end;
-
-            while (current != null)
-            {
-                stack.Push([current.Row, current.Col]);
-                current = current.Previous;
-            }
-
-            while (stack.Count > 0) visitedPositions.Enqueue(stack.Pop());
+            stack.Push([pathNode.Row, pathNode.Col]);
+            pathNode = pathNode.Previous;
         }
+
+        while (stack.Count > 0) visitedPositions.Enqueue(stack.Pop());
+
+        PathCost = end.Distance;
     }
 }
 
