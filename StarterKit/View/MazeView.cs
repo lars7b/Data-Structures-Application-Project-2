@@ -456,6 +456,39 @@ namespace View
             }
         }
 
+        public void HighlightShortestPath(Maze maze, Stack<int[]> shortestPath, PathFinderType algType, Queue<int[]> visitedPositions)
+        {
+            var array = maze.MazeMDArray;
+
+            Console.SetCursorPosition(0, 10);
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.WriteLine($"\n\n{String.Concat(Enumerable.Repeat("🟨", maze.MazeMDArray.GetLength(1)/2 - algType.ToString().Length/3) )}{"  " + algType + "  "}{String.Concat(Enumerable.Repeat("🟨", maze.MazeMDArray.GetLength(1)/2 - algType.ToString().Length/3))}");
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.WriteLine("                                      ");
+
+            for (int rowIdx = 0; rowIdx < array.GetLength(0); rowIdx++)
+            {
+                for (int colIdx = 0; colIdx < array.GetLength(1); colIdx++)
+                {
+                    bool isPath = shortestPath.Any(p => p[0] == rowIdx && p[1] == colIdx);
+                    bool isVisited = visitedPositions.Any(p => p[0] == rowIdx && p[1] == colIdx);
+
+                    if (array[rowIdx, colIdx] == -1) Console.Write("🟦");
+                    else if (rowIdx == maze.Begin[0] && colIdx == maze.Begin[1]) Console.Write("🏠");
+                    else if (rowIdx == maze.End[0] && colIdx == maze.End[1]) Console.Write("🏅");
+                    else if (isPath) Console.Write("🌟");
+                    else if (isVisited) Console.Write("❌");
+                    else Console.Write("  "); 
+                }
+                Console.WriteLine("🟦");
+            }
+
+            for (int colIdx = 0; colIdx <= array.GetLength(1); colIdx++)
+                Console.Write("🟦");
+        }
+
         public string[] generateSymbols(int spaces)
         {
             var rnd = new Random(); 

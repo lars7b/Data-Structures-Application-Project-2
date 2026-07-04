@@ -98,9 +98,15 @@ namespace Controller
                 var visitedPositions = new Queue<int[]>();
                 _pathFinder.FindPath(_maze, _maze.Begin, visitedPositions);
                 bool success = visitedPositions.ToList().Last()[0] == _maze.End[0] && visitedPositions.ToList().Last()[1] == _maze.End[1];
-                string msg = $"\n\n{String.Join("", Enumerable.Repeat(" ", _maze.MazeMDArray.GetLength(1)/6))}";
+                string padding = $"\n\n{String.Join("", Enumerable.Repeat(" ", _maze.MazeMDArray.GetLength(1)/6))}";
                 //_view.DisplayMaze(_maze, symbols, _timeInterval, visitedPositions);
                 _view.DisplayMaze(_maze, symbols, _timeInterval, visitedPositions, _pathFinder.algType);
+                if (success && _pathFinder.ShortestPath != null && _pathFinder.ShortestPath.Count > 0)
+                {
+                    Thread.Sleep(500);
+                    _view.HighlightShortestPath(_maze, _pathFinder.ShortestPath, _pathFinder.algType, visitedPositions);
+                }
+                string msg = $"\n\n{padding}Steps to find path: {_pathFinder.SearchSteps} | Size of path: {_pathFinder.PathCost}\n{padding}";
                 _view.DisplaySuccess(success, msg);
                 
             }
