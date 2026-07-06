@@ -4,7 +4,9 @@ namespace Model
     {
         PathFinderType _algType = PathFinderType.Astar;
         public PathFinderType algType { get => _algType; set {} }
-
+        public Stack<int[]> ShortestPath { get; set; }
+        public int SearchSteps { get; set; }
+        public int PathCost { get; set; }
         public class Node
         {
             public int[] Coords {get;set;}
@@ -38,23 +40,26 @@ namespace Model
             while(Open.Count > 0)
             {
                 Node current = Open.Dequeue();
+                visitedPositions.Enqueue(current.Coords);
+                SearchSteps++;
                 string currentKey = Key(current.Coords);
                 
                 if(current.Travelled > Gscore[currentKey]) continue;
 
                 if(current.Coords[0] == goal[0] && current.Coords[1] == goal[1])
                 {
-                    Stack<int[]> path = new Stack<int[]>();
+                    ShortestPath = new Stack<int[]>();
                     Node temp = current;
                     while(temp != null)
                     {
-                        path.Push(temp.Coords);
+                        ShortestPath.Push(temp.Coords);
                         temp = temp.Parent;
                     }
-                    while(path.Count > 0)
-                    {
-                        visitedPositions.Enqueue(path.Pop());
-                    }
+                    PathCost = ShortestPath.Count;
+                    // while(ShortestPath.Count > 0)
+                    // {
+                    //     visitedPositions.Enqueue(ShortestPath.Pop());
+                    // }
                     return;
                 }
                 //enqueue valid neigbors

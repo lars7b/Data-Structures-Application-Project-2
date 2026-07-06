@@ -1,28 +1,39 @@
 
+using System.Collections;
+
 namespace Model
 {
     public class RecursivePathFinder : IPathFinder
     {
         PathFinderType _algType = PathFinderType.Recursive;
         public PathFinderType algType { get => _algType; set {} }
+        public Stack<int[]> ShortestPath { get; set; } = new Stack<int[]>();
+        public int SearchSteps { get; set; } = 0;
+        public int PathCost { get; set; }
         bool EndFound = false;
-
+        public class Breadcrumb
+        {
+            public int[]Coords { get; set; }
+            public Breadcrumb? Parent { get; set; }
+        }
+        private Breadcrumb? previous = null;
         public void FindPath(Maze maze, int[] pos, Queue<int[]> visitedPositions)
         {
-            //ToDo implement this method
-            // while(pos != maze.End)
-            // {
-            //     if(maze.IsValidMove(maze.moves[1][0], maze.moves[0][-1]))
-            //     {
-            //         visitedPositions.Enqueue(pos);
-            //         FindPath(maze, pos = [0,1], visitedPositions);
-            //     }
-            // }
             if (EndFound) return;
             visitedPositions.Enqueue(pos);
+            // trail.Enqueue(breadCrumb);
+            Breadcrumb breadcrumb = new Breadcrumb(){Coords=pos, Parent = previous};
             if(pos[0] == maze.End[0] && pos[1] == maze.End[1])
             {
                 EndFound = true;
+                // BreadCrumb temp = trail.Dequeue();
+                Breadcrumb temp = breadcrumb;
+                while (temp != null)
+                {
+                    ShortestPath.Push(temp.Coords);
+                    temp = temp.Parent;
+                }
+                PathCost = ShortestPath.Count;
                 return;
             }
             foreach(int[] move in maze.moves)
@@ -43,6 +54,8 @@ namespace Model
                     }
                     if (notVisited)
                     {
+                        SearchSteps++;
+                        previous = breadcrumb;
                         FindPath(maze, check, visitedPositions);
                         if(EndFound) return;
                     }
