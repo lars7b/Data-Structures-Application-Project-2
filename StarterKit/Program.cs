@@ -33,7 +33,7 @@ xxxx    xxxxx xx xxxx xxxxx xx.
 xx            xx            xx.";
 
         //-----------constants:------------
-        const int rows = 12, cols = 2*rows;
+        const int rows = 25, cols = 2*rows;
         const int timeInterval = 400;
         //---------------------------------
         

@@ -60,7 +60,7 @@ namespace Model
             }
         }
 
-        private static void BraidMaze(int[][] maze, double rate = 0.10)
+        private static void BraidMaze(int[][] maze, double rate = 0.20)
         {
             var random = new Random();
             var height = maze.Length;
